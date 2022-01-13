@@ -41,9 +41,9 @@ def MDKsplit(data,n_splits=5,random_state=10):
 def MD_append(md,lmd):
     md = copy.deepcopy(md)
     for m in lmd:
-        md.df_structure.append(m.df_structure)
-        md.df_targets.append(m.df_targets)
-        md.df_featurized.append(m.df_featurized)
+        md.df_structure = md.df_structure.append(m.df_structure)
+        md.df_targets = md.df_targets.append(m.df_targets)
+        md.df_featurized = md.df_featurized.append(m.df_featurized)
     return md
 
 md_exp = MODData.load('exp_gap_all')
