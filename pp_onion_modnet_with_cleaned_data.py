@@ -17,7 +17,7 @@ np.random.seed(seed)
 tf.random.set_seed(seed)
 
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"] = '1'
+os.environ["CUDA_VISIBLE_DEVICES"] = ''
 
 def shuffle_MD(data,random_state=10):
     data = copy.deepcopy(data)
