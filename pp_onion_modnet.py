@@ -7,6 +7,14 @@ from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
 from sklearn.model_selection import KFold
 from modnet.preprocessing import MODData
+import tensorflow as tf
+import random
+
+seed = 1234
+
+random.seed(seed)
+np.random.seed(seed)
+tf.random.set_seed(seed)
 
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 os.environ["CUDA_VISIBLE_DEVICES"] = '1'

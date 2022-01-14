@@ -7,6 +7,14 @@ from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
 from sklearn.model_selection import KFold
 from modnet.preprocessing import MODData
+import tensorflow as tf
+import random
+
+seed = 1234
+
+random.seed(seed)
+np.random.seed(seed)
+tf.random.set_seed(seed)
 
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 os.environ["CUDA_VISIBLE_DEVICES"] = '1'
@@ -51,13 +59,11 @@ def MD_append_and_set(md, lmd, model_denoiser):
         orig_len = len(md.df_structure)
         md.df_structure = md.df_structure.append(m.df_structure)
         md.df_featurized = md.df_featurized.append(m.df_featurized)
-        
-        pred = model_denoiser.predict(md)
-        # print(orig_len, len(md.df_structure))
-        for idx, p in enumerate(pred):
-            if idx>orig_len and abs(p - m.df_targets[idx]) > 0.3:
-                m.df_targets[idx] = p
         md.df_targets = md.df_targets.append(m.df_targets)
+        pred = model_denoiser.predict(md)
+        for idx, p in enumerate(pred['gap']):
+            if idx>orig_len and abs(p - md.df_targets['gap'][idx]) > 0.3:
+                md.df_targets['gap'][idx] = p
     md = shuffle_MD(md)
     return md
 
