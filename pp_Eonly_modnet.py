@@ -54,7 +54,7 @@ md_hse = MODData.load('hse_gap.zip')
 md_hse.df_targets.columns = ['gap']
 md_gllb=MODData.load("gllb_gap.zip")
 md_gllb.df_targets.columns = ['gap']
-md_scan=MODData.load("scan_md.zip")
+md_scan=MODData.load("scan_md_new_from_pp.zip")
 md_scan.df_targets.columns = ['gap']
 
 k = 2
